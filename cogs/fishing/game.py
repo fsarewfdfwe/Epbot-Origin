@@ -14,7 +14,7 @@ import discord
 from discord.commands import slash_command
 from discord.ext import commands
 from discord.ui import View
-
+from discord.ext import bridge
 from classes.fish import Fish
 from classes.room import Room
 from classes.user import User
@@ -38,7 +38,7 @@ class FishingGameCog(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
 
-    @slash_command(name="낚시", description="이프와 함께 물고기를 낚아요!")
+    @bridge.bridge_command(name="낚시", description="이프와 함께 물고기를 낚아요!", aliases = ['ㄴㅅ'])
     @commands.cooldown(1, 5, commands.BucketType.user)
     @on_working.on_working(fishing=True, prohibition=True)
     async def fish(self, ctx: discord.ApplicationContext):
@@ -282,11 +282,11 @@ class FishingGameCog(commands.Cog):
         finally:
             user.set_fishing_now(False)
 
-    @slash_command(name="ㄴㅅ", description="이프와 함께 물고기를 낚아요!")
-    @commands.cooldown(1, 5, commands.BucketType.user)
-    @on_working.on_working(fishing=True, prohibition=True)
-    async def _short(self, ctx):
-        await self.fish(ctx)
+#     @slash_command(name="ㄴㅅ", description="이프와 함께 물고기를 낚아요!")
+#     @commands.cooldown(1, 5, commands.BucketType.user)
+#     @on_working.on_working(fishing=True, prohibition=True)
+#     async def _short(self, ctx):
+#         await self.fish(ctx)
 
 
 async def fishing_stoped(ctx: discord.ApplicationContext, user: User):
