@@ -2,7 +2,7 @@ import asyncio
 from discord.ext import commands
 from discord.commands import slash_command
 import discord
-
+from discord.ext import bridge
 import config
 from db.seta_pgsql import S_PgSQL
 from db.seta_sqlite import S_SQLite
@@ -27,7 +27,7 @@ intents = discord.Intents.default()
 fishdb = S_SQLite("static/fishing.db")
 
 
-class EpBot(discord.AutoShardedBot):
+class EpBot(bridge.AutoShardedBot):
     def __init__(self):
         super().__init__(
             help_command=None,
